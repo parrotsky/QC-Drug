@@ -109,7 +109,7 @@ def main():
     estimator = Estimator(
         backend_options = {
             'method': 'statevector',
-            'device': 'GPU'
+            'device': 'CPU'
             # 'noise_model': noise_model
         },
         run_options = {
