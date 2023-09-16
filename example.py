@@ -71,7 +71,7 @@ ansatz = UCCSD(
 estimator = Estimator(
     backend_options = {
         'method': 'statevector',
-        'device': 'CPU'
+        'device': 'GPU'
         # 'noise_model': noise_model
     },
     run_options = {
@@ -84,12 +84,13 @@ estimator = Estimator(
 )
 vqe_solver = VQE(estimator, ansatz, SLSQP())
 vqe_solver.initial_point = [0.0] * ansatz.num_parameters
-print (vqe_solver.initial_point)
+# print (ansatz.num_parameters)
+# print (vqe_solver.initial_point)
 start_time = time.time()
 calc = GroundStateEigensolver(mapper, vqe_solver)
 res = calc.solve(qmolecule)
-end_time = time.time()
-print(res)
+end_time = time.time() - start_time
+print(res, f", time: {end_time}")
 
 result = res.computed_energies + res.nuclear_repulsion_energy
 error_rate = abs(abs(ref_value - result) / ref_value * 100)
@@ -104,3 +105,6 @@ print("Error rate: %f%%" % (error_rate))
 #   pulse.call(ansatz)
 
 # print (f"Duration: {my_program1.duration}")
+
+
+
