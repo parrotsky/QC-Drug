@@ -28,7 +28,7 @@ from qiskit_nature.second_q.algorithms import GroundStateEigensolver
 
 
 def objective(trial, vqe_solver, mapper, qmolecule):
-    vqe_solver.initial_point = [trial.suggest_float(f'{i}', 0, 3) for i in range(92)]
+    vqe_solver.initial_point = [trial.suggest_float(f'{i}', -4, 4) for i in range(92)]
     # vqe_solver.initial_point = [0.0] * 92
     
     
