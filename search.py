@@ -27,7 +27,7 @@ from qiskit_nature.second_q.algorithms import GroundStateEigensolver
 
 
 
-def objective(trial, vqe_solver, mapper, qmolecule):
+def objective(trial, vqe_solver, mapper, qmolecule, ref_value):
     vqe_solver.initial_point = [trial.suggest_float(f'{i}', -4, 4) for i in range(92)]
     # vqe_solver.initial_point = [0.0] * 92
     
@@ -149,7 +149,7 @@ def main():
         # study.optimize(partial(single_objective, model=model, device_num=device_num,
         #  fail_num=fail_num, flops_reduction=args.flops, 
         # val_loader=val_loader), n_trials=100)
-        study.optimize(partial(objective, vqe_solver=vqe_solver, mapper=mapper, qmolecule=qmolecule), n_trials=100)
+        study.optimize(partial(objective, vqe_solver=vqe_solver, mapper=mapper, qmolecule=qmolecule, ref_value = ref_value), n_trials=100)
 
     # run_server(storage)
 
